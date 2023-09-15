@@ -2,7 +2,7 @@
 using ShopTARge22.Core.DTO;
 namespace ShopTARge222.Core.ServiceInterface
 {
-    public interface ISpaceShipsServices
+    public interface ISpaceshipsServices
     {
         Task<Spaceship> Create(SpaceshipDTO dto);
         Task<Spaceship> DetailsAsync(Guid id);
