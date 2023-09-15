@@ -16,10 +16,16 @@
             @foreach (var spaceships in Model)
             {
                 <tr>
-                    <td>spaceships.Name</td>
-                    <td>spaceships.Type</td>
-                    <td>spaceships.BuiltDate</td>
-                    <td>spaceships.Passengers</td>
+                    <td>@rowNumber</td>
+                    <td>@spaceships.Name</td>
+                    <td>@spaceships.Type</td>
+                    <td>@spaceships.BuiltDate</td>
+                    <td>@spaceships.Passengers</td>
+                    <td>
+                        <a asp-action="details" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn btn-info">Details</a> 
+                        <a asp-action="update" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn btn-primary">Update</a>
+                        <a asp-action="delete" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARge22.Data;
 using ShopTARge22.Models.Spaceships;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Xml.Linq;
+using ShopTARge22.Core.Domain;
 
 namespace ShopTARge22.Controllers
 {
@@ -32,6 +35,11 @@ namespace ShopTARge22.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Create() 
+        {
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(SpaceshipsCreateViewModel vm)
         {
@@ -52,6 +60,49 @@ namespace ShopTARge22.Controllers
 
             return RedirectToAction(nameof(Index), vm);
         
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var spaceship = await _spaceshipServices.DetailsAsync(id);
+
+            if (spaceship == null) 
+            {
+                return NotFound();
+            }
+
+            var vm = new SpaceshipsCreateUpdateViewModel();
+
+            vm.Id = spaceship.Id,
+            vm.Name = spaceship.Name,
+            vm.Type = spaceship.Type,
+            vm.Passengers = spaceship.Passengers,
+            vm.EnginePower = spaceship.EnginePower,
+            vm.Crew = spaceship.Crew,
+            vm.Company = spaceship.Company,
+            vm.CargoWeight = spaceship.CargoWeight
+
+            return View("CreateUpdate"vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(SpaceshipsCreateUpdateViewModel vm) 
+        {
+            var dto = new SpaceshipDto()
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                BuiltDate = vm.BuiltDate,
+                Passengers = vm.Passengers,
+                CargoWeight = vm.CargoWeight,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                Company = vm.Company,
+                CreatedAtAction = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt
+            };
         }
 
         [HttpPost]
