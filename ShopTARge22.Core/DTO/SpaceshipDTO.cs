@@ -18,6 +18,6 @@ namespace ShopTARge22.Core.DTO
 
         // Only in database
         public DateTime CreatedAt { get; set; }
-        public DateTime LastModifiedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
     }
 }

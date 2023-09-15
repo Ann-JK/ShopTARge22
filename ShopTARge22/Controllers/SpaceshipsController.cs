@@ -1,85 +1,204 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ShopTARge22.Core.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARge22.Core.DTO;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
+using ShopTARge22.Models.Spaceships;
 
-
-namespace ShopTARge22.ApplicationServices.Services
+namespace ShopTARge22.Controllers
 {
-    public class SpaceshipsServices : ISpaceshipsServices
+    public class SpaceshipsController : Controller
     {
         private readonly ShopTARge22Context _context;
+        private readonly ISpaceshipsServices _spaceshipServices;
 
-        public SpaceshipsServices
+        public SpaceshipsController
             (
-                ShopTARge22Context context
+                ShopTARge22Context context,
+                ISpaceshipsServices spaceshipsServices
             )
         {
             _context = context;
+            _spaceshipServices = spaceshipsServices;
         }
 
 
-        public async Task<Spaceship> Create(SpaceshipDTO dto)
+        public IActionResult Index()
         {
-            Spaceship spaceship = new Spaceship();
+            var result = _context.Spaceships
+                .Select(x => new SpaceshipsIndexViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Type = x.Type,
+                    BuiltDate = x.BuiltDate,
+                    Passengers = x.Passengers
+                });
 
-            spaceship.Id = Guid.NewGuid();
-            spaceship.Name = dto.Name;
-            spaceship.Type = dto.Type;
-            spaceship.BuiltDate = dto.BuiltDate;
-            spaceship.Passengers = dto.Passengers;
-            spaceship.CargoWeight = dto.CargoWeight;
-            spaceship.Crew = dto.Crew;
-            spaceship.EnginePower = dto.EnginePower;
-            spaceship.CreatedAt = DateTime.Now;
-            spaceship.ModifiedAt = DateTime.Now;
-
-            await _context.Spaceships.AddAsync(spaceship);
-            await _context.SaveChangesAsync();
-
-            return spaceship;
+            return View(result);
         }
 
-        public async Task<Spaceship> DetailsAsync(Guid id)
+        [HttpGet]
+        public IActionResult Create()
         {
-            var result = await _context.Spaceships
-                .FirstOrDefaultAsync(x => x.Id == id);
+            SpaceshipsCreateUpdateViewModel result = new SpaceshipsCreateUpdateViewModel();
 
-            return result;
+            return View("CreateUpdate", result);
         }
 
-        public async Task<Spaceship> Update(SpaceshipDTO dto)
+        [HttpPost]
+        public async Task<IActionResult> Create(SpaceshipsCreateUpdateViewModel vm)
         {
-            var domain = new Spaceship()
+            var dto = new SpaceshipDTO()
             {
-                Id = dto.Id,
-                Name = dto.Name,
-                Type = dto.Type,
-                BuiltDate = dto.BuiltDate,
-                Passengers = dto.Passengers,
-                CargoWeight = dto.CargoWeight,
-                Crew = dto.Crew,
-                EnginePower = dto.EnginePower,
-                CreatedAt = dto.CreatedAt,
-                ModifiedAt = DateTime.Now,
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                Passengers = vm.Passengers,
+                BuiltDate = vm.BuiltDate,
+                CargoWeight = vm.CargoWeight,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                FiletoApiDTOs = vm.Images
+                    .Select(x => new FileToApiDTO
+                    {
+                        Id = x.Id,
+                        ExistingFilePath = x.FilePath,
+                        SpaceshipId = x.SpaceshipId,
+                    }).ToArray()
             };
 
-            _context.Spaceships.Update(domain);
-            await _context.SaveChangesAsync();
+            var result = await _spaceshipServices.Create(dto);
 
-            return domain;
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index), vm);
         }
 
-        public async Task<Spaceship> Delete(Guid id)
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
         {
-            var spaceshipId = await _context.Spaceships
-                .FirstOrDefaultAsync(x => x.Id == id);
+            var spaceship = await _spaceshipServices.DetailsAsync(id);
 
-            _context.Spaceships.Remove(spaceshipId);
-            await _context.SaveChangesAsync();
+            if (spaceship == null)
+            {
+                return NotFound();
+            }
 
-            return spaceshipId;
+            var vm = new SpaceshipsCreateUpdateViewModel();
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.Type = spaceship.Type;
+            vm.BuiltDate = spaceship.BuiltDate;
+            vm.Passengers = spaceship.Passengers;
+            vm.CargoWeight = spaceship.CargoWeight;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+
+
+            return View("CreateUpdate", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(SpaceshipsCreateUpdateViewModel vm)
+        {
+            var dto = new SpaceshipDTO()
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                BuiltDate = vm.BuiltDate,
+                Passengers = vm.Passengers,
+                CargoWeight = vm.CargoWeight,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt
+            };
+
+            var result = await _spaceshipServices.Update(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index), vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var spaceship = await _spaceshipServices.DetailsAsync(id);
+
+            if (spaceship == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new SpaceshipDetailsViewModel();
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.Type = spaceship.Type;
+            vm.BuiltDate = spaceship.BuiltDate;
+            vm.Passengers = spaceship.Passengers;
+            vm.CargoWeight = spaceship.CargoWeight;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var spaceship = await _spaceshipServices.DetailsAsync(id);
+
+            if (spaceship == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new SpaceshipDeleteViewModel();
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.Type = spaceship.Type;
+            vm.BuiltDate = spaceship.BuiltDate;
+            vm.Passengers = spaceship.Passengers;
+            vm.CargoWeight = spaceship.CargoWeight;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var spaceshipId = await _spaceshipServices.Delete(id);
+
+            if (spaceshipId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -12,13 +12,16 @@ namespace ShopTARge22.ApplicationServices.Services
     public class SpaceshipsServices : ISpaceshipsServices
     {
         private readonly ShopTARge22Context _context;
+        private readonly FileServices _fileServices;
 
         public SpaceshipsServices
             (
-                ShopTARge22Context context
+                ShopTARge22Context context,
+                FileServices fileServices
             )
         {
             _context = context;
+            _fileServices = fileServices;
         }
 
 
@@ -36,6 +39,7 @@ namespace ShopTARge22.ApplicationServices.Services
             spaceship.EnginePower = dto.EnginePower;
             spaceship.CreatedAt = DateTime.Now;
             spaceship.ModifiedAt = DateTime.Now;
+            _fileServices.FilesToApi(dto, spaceship);
 
             await _context.Spaceships.AddAsync(spaceship);
             await _context.SaveChangesAsync();
