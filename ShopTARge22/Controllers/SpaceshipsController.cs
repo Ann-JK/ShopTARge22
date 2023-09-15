@@ -89,7 +89,7 @@ namespace ShopTARge22.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(SpaceshipsCreateUpdateViewModel vm) 
         {
-            var dto = new SpaceshipDto()
+            var dto = new SpaceshipDTO()
             {
                 Id = vm.Id,
                 Name = vm.Name,
@@ -103,6 +103,15 @@ namespace ShopTARge22.Controllers
                 CreatedAtAction = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt
             };
+
+            var result = await _spaceshipServices.Update(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index), vm);
         }
 
         [HttpPost]
