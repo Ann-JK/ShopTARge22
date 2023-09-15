@@ -7,10 +7,16 @@ namespace ShopTARge22.Controllers
     public class SpaceshipsController : Controller
     {
         private readonly ShopTARge22Context _context;
+        private readonly ISpaceshipServices _spaceshipServices;
 
-        public SpaceshipsController(ShopTARge22Context context)
+        public SpaceshipsController
+            (
+                ShopTARge22Context context, 
+                ISpaceshipServices spaceshipServices
+            )
         {
             _context = context;
+            _spaceshipServices = spaceshipServices;
         }
         public IActionResult Index()
         {
@@ -24,6 +30,40 @@ namespace ShopTARge22.Controllers
                     Passengers = x.Passengers
                  });
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(SpaceshipsCreateViewModel vm)
+        {
+            var dto = new SpaceshipDto()
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                Passengers = vm.Passengers,
+                EnginePower = vm.EnginePower,
+                Crew = vm.Crew,
+                Company = vm.Company,
+                CargoWeight = vm.CargoWeight
+
+            };
+
+            var result = await _spaceshipServices.Create(dto);
+
+            return RedirectToAction(nameof(Index), vm);
+        
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteConfirmation(Guid id) 
+        {
+            var spaceshipId = await _spaceshipServices.Delete(id);
+
+            if (spaceshipId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
