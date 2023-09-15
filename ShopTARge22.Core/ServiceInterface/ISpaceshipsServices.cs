@@ -1,6 +1,6 @@
 ﻿using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.DTO;
-namespace ShopTARge222.Core.ServiceInterface
+namespace ShopTARge22.Core.ServiceInterface
 {
     public interface ISpaceshipsServices
     {
