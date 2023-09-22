@@ -61,10 +61,10 @@ namespace ShopTARge22.Controllers
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt,
                 Files = vm.Files,
-                FiletoApiDTOs = vm.Images
+                FiletoApiDTOs = vm.Image
                     .Select(x => new FileToApiDTO
                     {
-                        Id = x.Id,
+                        Id = x.ImageId,
                         ExistingFilePath = x.FilePath,
                         SpaceshipId = x.SpaceshipId,
                     }).ToArray()
