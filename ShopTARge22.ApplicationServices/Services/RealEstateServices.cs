@@ -8,5 +8,7 @@ namespace ShopTARge22.ApplicationServices.Services
 {
     public class RealEstateServices
     {
+
+        //TODO
     }
 }

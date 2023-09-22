@@ -1,8 +1,6 @@
-﻿using ShopTARge22.Models.Spaceships;
-
-namespace ShopTARge22.Models.RealEstates
+﻿namespace ShopTARge22.Models.RealEstates
 {
-    public class RealEstateCreateUpdateViewModel
+    public class RealEstateDeleteViewModel
     {
         public Guid? Id { get; set; }
         public string Address { get; set; }
