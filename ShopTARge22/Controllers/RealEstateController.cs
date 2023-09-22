@@ -167,6 +167,8 @@ namespace ShopTARge22.Controllers
             vm.BuiltInYear = realEstate.BuiltInYear;
             vm.CreatedAt = realEstate.CreatedAt;
             vm.UpdatedAt = realEstate.UpdatedAt;
+
+            return View(vm);
         }
 
         [HttpPost]

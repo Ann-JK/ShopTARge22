@@ -10,7 +10,7 @@ namespace ShopTARge22.Core.Domain
     public class RealEstate
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string Address { get; set; }
         public float SizeSqrM { get; set; }
         public int RoomCount { get; set; }
