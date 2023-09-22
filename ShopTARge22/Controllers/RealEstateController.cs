@@ -95,6 +95,32 @@ namespace ShopTARge22.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Update(RealEstateCreateUpdateViewModel vm) 
+        {
+            var dto = new RealEstateDTO()
+            {
+                Id = vm.Id,
+                Address = vm.Address,
+                SizeSqrM = vm.SizeSqrM,
+                RoomCount = vm.RoomCount,
+                Floor = vm.Floor,
+                BuildingType = vm.BuildingType,
+                BuiltInYear = vm.BuiltInYear,
+                CreatedAt = vm.CreatedAt,
+                UpdatedAt = vm.UpdatedAt
+            };
+
+            var result = await _realEstateServices.Update(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index), vm);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
