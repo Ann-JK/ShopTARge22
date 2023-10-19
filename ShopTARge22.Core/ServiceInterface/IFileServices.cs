@@ -6,5 +6,8 @@ namespace ShopTARge22.Core.ServiceInterface
     public interface IFileServices
     {
         void FilesToApi(SpaceshipDTO dto, Spaceship spaceship);
+
+        Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDTO[] dtos);
+       
     }
 }

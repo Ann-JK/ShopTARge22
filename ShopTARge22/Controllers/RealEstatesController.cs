@@ -6,12 +6,12 @@ using ShopTARge22.Core.DTO;
 
 namespace ShopTARge22.Controllers
 {
-    public class RealEstateController : Controller
+    public class RealEstatesController : Controller
     {
         private readonly ShopTARge22Context _context;
         private readonly IRealEstateServices _realEstateServices;
 
-        public RealEstateController
+        public RealEstatesController
             (
                 ShopTARge22Context context,
                 IRealEstateServices realEstateServices
