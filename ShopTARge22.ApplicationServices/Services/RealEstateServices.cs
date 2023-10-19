@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.DTO;
+using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
 using System.Net.Sockets;
 
 namespace ShopTARge22.ApplicationServices.Services
 {
-    public class RealEstateServices
+    public class RealEstateServices : IRealEstateServices
     {
         private readonly ShopTARge22Context _context;
 
