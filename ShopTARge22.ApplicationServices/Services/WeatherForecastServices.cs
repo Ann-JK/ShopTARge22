@@ -10,6 +10,13 @@ namespace ShopTARge22.ApplicationServices.Services
 {
     public class WeatherForecastServices : IWeatherForecastServices
     {
-        WeatherResponseDTO IWeatherForecastServices.getForecast(string city);
+        WeatherResponseRootDTO IWeatherForecastServices.GetForecast(string city)
+        {
+            string idOpenWeather = "61db3921e67b92739e34a4b29843bb79";
+            string url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={idOpenWeather}";
+
+            return null;
+
+        }
     }
 }

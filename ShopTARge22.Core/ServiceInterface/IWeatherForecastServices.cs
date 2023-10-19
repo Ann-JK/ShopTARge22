@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopTARge22.Core.DTO.WeatherForecastsDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ShopTARge22.Core.ServiceInterface
 {
     public interface IWeatherForecastServices
     {
+        WeatherResponseRootDTO GetForecast(string city);
     }
 }
