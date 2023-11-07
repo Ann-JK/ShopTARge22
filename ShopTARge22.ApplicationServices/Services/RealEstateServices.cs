@@ -3,20 +3,27 @@ using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.DTO;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
+using System.Drawing;
+using System.Net;
 using System.Net.Sockets;
+using System.Xml;
 
 namespace ShopTARge22.ApplicationServices.Services
 {
     public class RealEstateServices : IRealEstateServices
     {
         private readonly ShopTARge22Context _context;
+        private readonly IFileServices _fileServices;
 
         public RealEstateServices
             (
-                ShopTARge22Context context
+                ShopTARge22Context context, 
+                IFileServices fileServices
+
             )
         {
             _context = context;
+            _fileServices = fileServices;
         }
 
         public async Task<RealEstate> Create(RealEstateDTO dto)
@@ -32,6 +39,10 @@ namespace ShopTARge22.ApplicationServices.Services
             realEstate.BuiltInYear = dto.BuiltInYear;
             realEstate.CreatedAt = dto.CreatedAt;
             realEstate.UpdatedAt = dto.UpdatedAt;
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, realEstate);
+            }
 
             await _context.RealEstates.AddAsync(realEstate);
             await _context.SaveChangesAsync();
@@ -49,23 +60,26 @@ namespace ShopTARge22.ApplicationServices.Services
 
         public async Task<RealEstate> Update(RealEstateDTO dto)
         {
-            var domain = new RealEstate()
-            {
-                Id = dto.Id,
-                Address = dto.Address,
-                SizeSqrM = dto.SizeSqrM,
-                RoomCount = dto.RoomCount,
-                Floor = dto.Floor,
-                BuildingType = dto.BuildingType,
-                BuiltInYear = dto.BuiltInYear,
-                CreatedAt = dto.CreatedAt,
-                UpdatedAt = dto.UpdatedAt
-            };
+            RealEstate realEstate = new();
 
-            _context.RealEstates.Update(domain);
+            realEstate.Id = dto.Id;
+            realEstate.Address = dto.Address;
+            realEstate.SizeSqrM = dto.SizeSqrM;
+            realEstate.RoomCount = dto.RoomCount;
+            realEstate.Floor = dto.Floor;
+            realEstate.BuildingType = dto.BuildingType;
+            realEstate.BuiltInYear = dto.BuiltInYear;
+            realEstate.CreatedAt = dto.CreatedAt;
+            realEstate.UpdatedAt = dto.UpdatedAt;
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, realEstate);
+            }
+
+            _context.RealEstates.Update(realEstate);
             await _context.SaveChangesAsync();
 
-            return domain;
+            return realEstate;
         }
 
         public async Task<RealEstate> Delete(Guid id)

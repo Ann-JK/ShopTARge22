@@ -8,6 +8,10 @@ namespace ShopTARge22.Core.ServiceInterface
         void FilesToApi(SpaceshipDTO dto, Spaceship spaceship);
 
         Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDTO[] dtos);
+
+        void UploadFilesToDatabase(RealEstateDTO dto, RealEstate domain);
+
+        Task<FileToDatabase> RemoveFilesFromDatabase(FileToDatabaseDTO dto);
        
     }
 }

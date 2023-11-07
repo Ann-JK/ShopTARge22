@@ -20,6 +20,7 @@ namespace ShopTARge22.Core.DTO
         public DateTime BuiltInYear { get; set; }
 
         public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToDatabaseDTO> Image { get; set; } = new List<FileToDatabaseDTO>();
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
