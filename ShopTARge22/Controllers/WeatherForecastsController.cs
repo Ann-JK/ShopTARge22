@@ -33,9 +33,9 @@ namespace ShopTARge22.Controllers
             return View(model);
         }
 
-        public IActionResult City(string city) 
-        {
+        //public IActionResult City(string city) 
+        //{
         
-        }
+        //}
     }
 }

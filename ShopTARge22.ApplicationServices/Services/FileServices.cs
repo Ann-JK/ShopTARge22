@@ -48,6 +48,20 @@ namespace ShopTARge22.ApplicationServices.Services
             }
         }
 
+        public async Task<FileToDatabase> RemoveFilesFromDatabase(FileToDatabaseDTO dto)
+        {
+            var imageId = await _context.FileToDatabases
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+            if (imageId != null)
+            {
+                _context.FileToDatabases.Remove(imageId);
+                await _context.SaveChangesAsync();
+            }
+
+            return null;
+        }
+
         public void FilesToApi(SpaceshipDTO dto, Spaceship spaceship)
         {
             if (dto.Files != null && dto.Files.Count > 0) 
