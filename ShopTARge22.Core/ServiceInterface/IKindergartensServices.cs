@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShopTARge22.Core.ServiceInterface
 {
-    public interface IKindergartensServices
+    public interface IKindergartensS5ervices
     {
         Task<Kindergarten> Create(KindergartenDTO dto);
         Task<Kindergarten> DetailsAsync(Guid id);
