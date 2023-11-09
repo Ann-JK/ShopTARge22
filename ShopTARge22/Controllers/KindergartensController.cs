@@ -66,5 +66,27 @@ namespace ShopTARge22.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var kindergarten = await _kindergartensServices.DetailsAsync(id);
+
+            if (kindergarten == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new KindergartenCreateUpdateViewModel();
+
+            vm.Id = kindergarten.Id;
+            vm.GroupName = kindergarten.GroupName;
+            vm.ChildrenCount = kindergarten.ChildrenCount;
+                vm.KindergartenName = kindergarten.KindergartenName,
+                Teacher = vm.Teacher,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt
+            
+        }
     }
 }
