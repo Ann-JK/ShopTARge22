@@ -72,7 +72,6 @@ namespace ShopTARge22.ApplicationServices.Services
                 dto.StrCreativeCommonsConfirmed = cocktailResult.Drink.StrCreativeCommonsConfirmed;
                 dto.DateModified = cocktailResult.Drink.DateModified;
 
-
             }
         }
     }
