@@ -14,16 +14,13 @@ namespace ShopTARge22.ApplicationServices.Services
     public class KindergartensServices : IKindergartensServices
     {
         private readonly ShopTARge22Context _context;
-        private readonly IKindergartensServices _services;
 
         public KindergartensServices
             (
-                ShopTARge22Context context,
-                IKindergartensServices services
+                ShopTARge22Context context
             )
         { 
             _context = context;
-            _services = services;
         }
 
         public async Task<Kindergarten> Create(KindergartenDTO dto) 

@@ -3,10 +3,6 @@ using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.DTO;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
-using System.Drawing;
-using System.Net;
-using System.Net.Sockets;
-using System.Xml;
 
 namespace ShopTARge22.ApplicationServices.Services
 {
