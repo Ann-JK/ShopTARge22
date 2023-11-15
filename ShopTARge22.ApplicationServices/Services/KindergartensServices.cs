@@ -51,20 +51,20 @@ namespace ShopTARge22.ApplicationServices.Services
 
         public async Task<Kindergarten> Update(KindergartenDTO dto)
         {
-            Kindergarten kindergarten = new Kindergarten();
+            Kindergarten domain = new();
 
-            kindergarten.Id = Guid.NewGuid();
-            kindergarten.GroupName = dto.GroupName;
-            kindergarten.ChildrenCount = dto.ChildrenCount;
-            kindergarten.KindergartenName = dto.KindergartenName;
-            kindergarten.Teacher = dto.Teacher;
-            kindergarten.CreatedAt = dto.CreatedAt;
-            kindergarten.ModifiedAt = DateTime.Now;
+            domain.Id = dto.Id;
+            domain.GroupName = dto.GroupName;
+            domain.ChildrenCount = dto.ChildrenCount;
+            domain.KindergartenName = dto.KindergartenName;
+            domain.Teacher = dto.Teacher;
+            domain.CreatedAt = dto.CreatedAt;
+            domain.ModifiedAt = DateTime.Now;
 
-            _context.Kindergartens.Update(kindergarten);
+            _context.Kindergartens.Update(domain);
             await _context.SaveChangesAsync();
 
-            return kindergarten;
+            return domain;
         }
 
         public async Task<Kindergarten> Delete(Guid id)

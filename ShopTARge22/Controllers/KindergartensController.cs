@@ -85,7 +85,7 @@ namespace ShopTARge22.Controllers
             vm.KindergartenName = kindergarten.KindergartenName;
             vm.Teacher = kindergarten.Teacher;
             vm.CreatedAt = kindergarten.CreatedAt;
-            vm.ModifiedAt = vm.ModifiedAt;
+            vm.ModifiedAt = kindergarten.ModifiedAt;
 
             return View("CreateUpdate", vm);
         }
@@ -133,7 +133,7 @@ namespace ShopTARge22.Controllers
             vm.KindergartenName = kindergarten.KindergartenName;
             vm.Teacher = kindergarten.Teacher;
             vm.CreatedAt = kindergarten.CreatedAt;
-            vm.ModifiedAt = vm.ModifiedAt;
+            vm.ModifiedAt = kindergarten.ModifiedAt;
 
             return View(vm);
         }
