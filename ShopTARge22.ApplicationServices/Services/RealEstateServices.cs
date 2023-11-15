@@ -33,8 +33,8 @@ namespace ShopTARge22.ApplicationServices.Services
             realEstate.Floor = dto.Floor;
             realEstate.BuildingType = dto.BuildingType;
             realEstate.BuiltInYear = dto.BuiltInYear;
-            realEstate.CreatedAt = dto.CreatedAt;
-            realEstate.UpdatedAt = dto.UpdatedAt;
+            realEstate.CreatedAt = DateTime.Now;
+            realEstate.UpdatedAt = DateTime.Now;
             if (dto.Files != null)
             {
                 _fileServices.UploadFilesToDatabase(dto, realEstate);
@@ -66,7 +66,7 @@ namespace ShopTARge22.ApplicationServices.Services
             realEstate.BuildingType = dto.BuildingType;
             realEstate.BuiltInYear = dto.BuiltInYear;
             realEstate.CreatedAt = dto.CreatedAt;
-            realEstate.UpdatedAt = dto.UpdatedAt;
+            realEstate.UpdatedAt = DateTime.Now;
             if (dto.Files != null)
             {
                 _fileServices.UploadFilesToDatabase(dto, realEstate);
