@@ -12,7 +12,7 @@ namespace ShopTARge22.ApplicationServices.Services
 {
     public class WeatherForecastServices : IWeatherForecastServices
     {
-        public async Task<OpenWeatherResultDTO> GetForecast(OpenWeatherResultDTO dto)
+        public async Task<OpenWeatherResultDTO> OpenWeatherResult(OpenWeatherResultDTO dto)
         {
             string idOpenWeather = "61db3921e67b92739e34a4b29843bb79";
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={dto.City}&units=metric&appid={idOpenWeather}";
@@ -30,7 +30,7 @@ namespace ShopTARge22.ApplicationServices.Services
                 dto.Description = weatherResult.Weather[0].Description;
 
             }
-            s
+            
             return dto;
 
         }
