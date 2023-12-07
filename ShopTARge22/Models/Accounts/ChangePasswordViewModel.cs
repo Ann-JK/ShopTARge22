@@ -21,4 +21,3 @@ namespace ShopTARge22.Models.Accounts
         public string ConfirmPassword { get; set; }
     }
 }
-}

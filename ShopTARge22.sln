@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge22", "ShopTARge22\ShopTARge22.csproj", "{66B478AE-3400-4ADB-BE46-3CEFBE59D299}"
+	ProjectSection(ProjectDependencies) = postProject
+		{20834CCC-35C9-46A7-B8BB-16845CBDFA61} = {20834CCC-35C9-46A7-B8BB-16845CBDFA61}
+		{2E2F6624-F85D-4049-81D3-F1FDEF2533F3} = {2E2F6624-F85D-4049-81D3-F1FDEF2533F3}
+		{E19334E8-BF71-4A1E-9951-E69B5AC28C7C} = {E19334E8-BF71-4A1E-9951-E69B5AC28C7C}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge22.Data", "ShopTARge22.Data\ShopTARge22.Data.csproj", "{A8838E29-D2D9-4EE1-A0DE-2C7E954A0BD0}"
 EndProject
@@ -11,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge22.Core", "ShopTAR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge22.ApplicationServices", "ShopTARge22.ApplicationServices\ShopTARge22.ApplicationServices.csproj", "{8C323B72-83E1-4E46-9C11-60852314BCD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTARge22.SpaceshipsTest", "SpaceShipsTests\ShopTARge22.SpaceshipsTest.csproj", "{20834CCC-35C9-46A7-B8BB-16845CBDFA61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge22.SpaceshipsTest", "SpaceShipsTests\ShopTARge22.SpaceshipsTest.csproj", "{20834CCC-35C9-46A7-B8BB-16845CBDFA61}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge22.RealEstatesTests", "RealEstatesTests\ShopTARge22.RealEstatesTests.csproj", "{2E2F6624-F85D-4049-81D3-F1FDEF2533F3}"
 EndProject
