@@ -1,12 +1,7 @@
 ﻿using Nancy.Json;
 using ShopTARge22.Core.DTO.WeatherForecastsDTOs;
 using ShopTARge22.Core.ServiceInterface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopTARge22.ApplicationServices.Services
 {
@@ -17,9 +12,11 @@ namespace ShopTARge22.ApplicationServices.Services
             string idOpenWeather = "61db3921e67b92739e34a4b29843bb79";
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={dto.City}&units=metric&appid={idOpenWeather}";
 
+
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(url);
+
                 WeatherResponseRootDTO weatherResult = new JavaScriptSerializer().Deserialize<WeatherResponseRootDTO>(json);
                 dto.City = weatherResult.Name;
                 dto.Temp = weatherResult.Main.Temp;

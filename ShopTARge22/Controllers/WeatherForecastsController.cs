@@ -20,7 +20,7 @@ namespace ShopTARge22.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            SearchCityViewModel model = new();
+            //SearchCityViewModel model = new();
             return View();
         }
 
@@ -29,7 +29,7 @@ namespace ShopTARge22.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("City,", "WeatherForecasts", new { city = model.CityName });
+                return RedirectToAction("City", "WeatherForecasts", new { city = model.CityName });
             }
             return View(model);
         }
