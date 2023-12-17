@@ -1,4 +1,5 @@
 ﻿using Nancy.Json;
+using ShopTARge22.Core.DTO.AccuWeatherDTOs;
 using ShopTARge22.Core.ServiceInterface;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace ShopTARge22.ApplicationServices.Services
         }
 
 
-        public async Task<AccuWeatherResultDTOs> AccuWeatherResult(AccuWeatherResultDTOs dto, AccuWeatherLocationResultDTO dto1)
+        public async Task<AccuWeatherResultDTO> AccuWeatherResult(AccuWeatherResultDTO dto, AccuWeatherLocationResultDTO dto1)
         {
             await AccuWeatherGet(dto1);
 
@@ -49,7 +50,7 @@ namespace ShopTARge22.ApplicationServices.Services
                 using (WebClient client = new WebClient())
                 {
                     string json = client.DownloadString(url);
-                    List<AccuWeatherRootDTOs> accuResult = new JavaScriptSerializer().Deserialize<List<AccuWeatherRootDTOs>>(json);
+                    List<AccuWeatherRootDTO> accuResult = new JavaScriptSerializer().Deserialize<List<AccuWeatherRootDTO>>(json);
 
                     dto.Temperature = accuResult[0].Temperature.Metric.Value;
                     dto.RealFeelTemperature = accuResult[0].RealFeelTemperature.Metric.Value;

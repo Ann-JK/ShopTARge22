@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopTARge22.Core.DTO.AccuWeatherDTOs;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Models.AccuWeatherForecasts;
 
@@ -32,7 +33,7 @@ namespace ShopTARge22.Controllers
         [HttpGet]
         public async Task<IActionResult> City(string city)
         {
-            AccuWeatherResultDTOs dto = new();
+            AccuWeatherResultDTO dto = new();
             AccuWeatherLocationResultDTO dtoLocation = new();
 
             dtoLocation.City = city;

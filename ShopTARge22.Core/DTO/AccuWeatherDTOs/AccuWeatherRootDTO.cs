@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
 {
-    internal class AccuWeatherRootDTO
+    public class AccuWeatherRootDTO
     {
         [JsonPropertyName("localObservationDateTime")]
         public DateTime LocalObservationDateTime { get; set; }
