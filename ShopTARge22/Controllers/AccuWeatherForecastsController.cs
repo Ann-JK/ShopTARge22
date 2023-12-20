@@ -28,6 +28,8 @@ namespace ShopTARge22.Controllers
             {
                 return RedirectToAction("City", "AccuWeatherForecasts", new { city = model.City});
             }
+
+            return View(vm);
         }
 
         [HttpGet]
@@ -38,6 +40,18 @@ namespace ShopTARge22.Controllers
 
             dtoLocation.City = city;
 
+            await _accuWeatherForecastsServices.AccuWeatherResult(dto, dtoLocation);
+
+            AccuWeatherViewModel vm = new();
+            vm.City = dtoLocation.City;
+            vm.Temperature = dto.Temperature;
+            vm.RealFeelTemperature = dto.RealFeelTemperature;
+            vm.RelativeHumidity = dto.RelativeHumidity;
+            vm.Wind = dto.Wind;
+            vm.Pressure = dto.Pressure;
+            vm.WeatherText = dto.WeatherText;
+
+            return View(vm);
 
         }
 
