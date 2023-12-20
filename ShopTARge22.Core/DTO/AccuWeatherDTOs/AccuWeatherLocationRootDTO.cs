@@ -93,10 +93,10 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
     public class Elevation
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial imperial { get; set; }
+        public LocationImperial imperial { get; set; }
     }
 
     public class GeoPosition
@@ -111,7 +111,7 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
         public Elevation Elevation { get; set; }
     }
 
-    public class Imperial
+    public class LocationImperial
     {
         [JsonPropertyName("value")]
         public int Value { get; set; }
@@ -123,7 +123,7 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
         public int UnitType { get; set; }
     }
 
-    public class Metric
+    public class LocationMetric
     {
         [JsonPropertyName("value")]
         public int Value { get; set; }

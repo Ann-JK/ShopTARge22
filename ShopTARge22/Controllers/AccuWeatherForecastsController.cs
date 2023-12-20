@@ -26,7 +26,7 @@ namespace ShopTARge22.Controllers
         {
             if (ModelState.IsValid) 
             {
-                return RedirectToAction("City", "AccuWeatherForecasts", new { city = model.City});
+                return RedirectToAction("City", "AccuWeatherForecasts", new { city = vm.City});
             }
 
             return View(vm);
@@ -43,6 +43,8 @@ namespace ShopTARge22.Controllers
             await _accuWeatherForecastsServices.AccuWeatherResult(dto, dtoLocation);
 
             AccuWeatherViewModel vm = new();
+
+            vm.Country = dtoLocation.LocalizedName;
             vm.City = dtoLocation.City;
             vm.Temperature = dto.Temperature;
             vm.RealFeelTemperature = dto.RealFeelTemperature;

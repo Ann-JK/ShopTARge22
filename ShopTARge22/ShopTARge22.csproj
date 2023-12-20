@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="multipleFileUpload\" />
-    <Folder Include="Views\AccuWeatherForecasts\" />
   </ItemGroup>
 
 </Project>

@@ -202,19 +202,19 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
     public class Past12Hours
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Past18Hours
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Past24HourRange
@@ -229,28 +229,28 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
     public class Past24Hours
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Past24HourTemperatureDeparture
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Past3Hours
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Past6HourRange
@@ -265,55 +265,55 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
     public class Past6Hours
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Past9Hours
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class PastHour
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Precip1hr
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Precipitation
     {
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Pressure
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class PressureTendency
@@ -328,37 +328,37 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
     public class RealFeelTemperature
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class RealFeelTemperatureShade
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Speed
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Temperature
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class TemperatureSummary
@@ -376,19 +376,19 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
     public class Visibility
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class WetBulbTemperature
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class Wind
@@ -403,10 +403,10 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
     public class WindChillTemperature
     {
         [JsonPropertyName("Metric")]
-        public Metric Metric { get; set; }
+        public LocationMetric Metric { get; set; }
 
         [JsonPropertyName("Imperial")]
-        public Imperial Imperial { get; set; }
+        public LocationImperial Imperial { get; set; }
     }
 
     public class WindGust
