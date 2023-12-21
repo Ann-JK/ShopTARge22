@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.ApplicationServices.Services;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Identity;
+using ShopTARge22.Core.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +17,22 @@ builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
 builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
 builder.Services.AddScoped<IKindergartensServices, KindergartensServices>();
 builder.Services.AddScoped<ICocktailServices, CocktailServices>();
-builder.Services.AddScoped<IAccuWeatherForecastsServices, AccuWeatherForecastsServices>();  
+builder.Services.AddScoped<IAccuWeatherForecastsServices, AccuWeatherForecastsServices>();
+builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<ShopTARge22Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => 
+    {
+        options.SignIn.RequireConfirmedAccount = true;
+        options.Password.RequiredLength = 3;
+        options.Lockout.MaxFailedAccessAttempts = 3;
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+    })
+    .AddEntityFrameworkStores<ShopTARge22Context>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 
 
 
@@ -46,7 +60,10 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 //landing page
 app.MapControllerRoute(

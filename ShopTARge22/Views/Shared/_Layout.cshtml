@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using ShopTARge22.Core.Domain;
+@inject SignInManager<ApplicationUser> signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -44,13 +48,36 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cocktails" asp-action="Index">Cocktails</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Accounts" asp-action="Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Accounts" asp-action="Login">Login</a>
-                        </li>
+                    <ul class="navbar-nav ml-auto">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a onclick="layoutDropdown" class="dropbtn" style=""
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage
+                                </a>
+                                <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class=" nav-link text-dark" asp-controller="Accounts" asp-action="ChangePassword">Password</a>
+                                    <a class=" nav-link text-dark" asp-controller="Accounts" asp-action="ResetPassword">Reset Password</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <form method="post" asp-controller="Accounts" asp-action="Logout">
+                                    <button type="submit" class="nav-link btn btn-link py-0" style="width:auto; padding-top: 0.8rem;">
+                                        Logout @User.Identity.Name
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Accounts" asp-action="Register"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Accounts" asp-action="Login">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -71,5 +98,24 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function layoutDropdown() { 
+            document.getElementById("navbarDropdownMenuLink").classList.toggle("show");
+        }
+
+        window.onclick = function (event) { 
+            if (!event.target.matches('.dropbtn')) { 
+                var dropdowns = document.getElementsByClassName("dropdown-content")
+                var i;
+                for (i = 0; i < dropdowns.length; i++) { 
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) { 
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>

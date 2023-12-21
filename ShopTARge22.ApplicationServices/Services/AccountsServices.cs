@@ -10,7 +10,11 @@ namespace ShopTARge22.ApplicationServices.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public AccountsServices(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountsServices
+            (
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ShopTARge22.Core.Domain;
 
 namespace ShopTARge22.Data
 {
-    public class ShopTARge22Context : DbContext
+    public class ShopTARge22Context : IdentityDbContext<ApplicationUser>
     {
         public ShopTARge22Context(DbContextOptions<ShopTARge22Context> options) : base(options) { }
 
@@ -16,5 +18,7 @@ namespace ShopTARge22.Data
         public DbSet<FileToDatabase> FileToDatabases { get; set; }
 
         public DbSet<Kindergarten> Kindergartens { get; set; }
+
+        public DbSet<IdentityRole> IdentityRoles { get; set; }
     }
 }
