@@ -12,7 +12,7 @@ namespace ShopTARge22.ApplicationServices.Services
 {
     public class AccuWeatherForecastsServices : IAccuWeatherForecastsServices
     {
-        readonly string API_Key = "4sGqCKlW6EcTwWXnXCvWT8GRDMJsnyWg";
+        readonly string API_Key = "kMs2HFAF8FmvibQfXySGenpnEtCE9IDf";
 
 
         public async Task<AccuWeatherLocationResultDTO> AccuWeatherGet(AccuWeatherLocationResultDTO dtoLocation)
@@ -27,16 +27,12 @@ namespace ShopTARge22.ApplicationServices.Services
                     string json = client.DownloadString(url1);
                     List<AccuWeatherLocationRootDTO> accuGet = new JavaScriptSerializer().Deserialize<List<AccuWeatherLocationRootDTO>>(json);
 
-                    if (accuGet != null && accuGet.Count > 0)
-                    {
+
                         dtoLocation.Key = accuGet[0].Key;
                         dtoLocation.Country = accuGet[0].Country;
                         dtoLocation.LocalizedName = accuGet[0].LocalizedName;
-                    }
-                    else
-                    {
-                        Console.WriteLine("City not available. Try another city");
-                    }
+       
+
                 }
             }
             catch (NullReferenceException nullEx)

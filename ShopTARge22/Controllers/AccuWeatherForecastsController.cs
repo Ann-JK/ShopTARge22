@@ -44,7 +44,6 @@ namespace ShopTARge22.Controllers
 
             AccuWeatherViewModel vm = new();
 
-            vm.Country = dtoLocation.LocalizedName;
             vm.City = dtoLocation.City;
             vm.Temperature = dto.Temperature;
             vm.RealFeelTemperature = dto.RealFeelTemperature;
