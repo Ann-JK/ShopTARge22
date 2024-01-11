@@ -46,7 +46,17 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>
 builder.Services.Configure<CustomEmailConfigurationTokenProviderOptions>
     (o => o.TokenLifespan = TimeSpan.FromDays(3));
 
-
+builder.Services.AddAuthentication()
+    //.AddFacebook(options =>
+    //{
+    //    options.AppId = "";
+    //    options.AppSecret = "";
+    //})
+    .AddGoogle(options =>
+    {
+        options.ClientId = "653663266336-kv6l3lfqg666ufian0ccrh55anf6a10q.apps.googleusercontent.com";
+        options.ClientSecret = "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";
+    });
 
 var app = builder.Build();
 
@@ -71,18 +81,6 @@ app.UseStaticFiles(new StaticFileOptions
 ;
 
 app.UseRouting();
-
-builder.Services.AddAuthentication()
-    .AddFacebook(options => 
-    {
-        options.AppId = "";
-        options.AppSecret = "";
-    })
-    .AddGoogle(options =>
-    {
-        options.ClientId = "";
-        options.ClientSecret = "";
-    });
 
 app.UseAuthentication();
 

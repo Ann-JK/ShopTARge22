@@ -264,12 +264,12 @@ namespace ShopTARge22.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(/*string returnUrl*/)
+        public async Task<IActionResult> Login(string? returnUrl)
         {
             LoginViewModel vm = new()
             {
-                //ReturnUrl = returnUrl,
-                //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
             };
 
             return View(vm);
@@ -294,18 +294,18 @@ namespace ShopTARge22.Controllers
 
                 if (result.Succeeded)
                 {
-                    //if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                    //{
-                    //    return Redirect(returnUrl);
-                    //}
-                    //else
-                    //{
-                    System.Console.WriteLine("Logging in should be successful");
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Logging in should be successful");
                     System.Console.WriteLine("Result of PasswordSignInAsync: " + result);
 
                     return RedirectToAction("Index", "Home");
-                    
-                    //}
+
+                    }
                 }
 
                 if (result.IsLockedOut)
@@ -321,7 +321,7 @@ namespace ShopTARge22.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult ExternalLogin(string provider, string returnUrl)
+        public IActionResult ExternalLogin(string provider, string? returnUrl)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Accounts", new { returnUrl = returnUrl });
 
