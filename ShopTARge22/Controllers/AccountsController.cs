@@ -323,6 +323,8 @@ namespace ShopTARge22.Controllers
         [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string? returnUrl)
         {
+
+
             var redirectUrl = Url.Action("ExternalLoginCallback", "Accounts", new { returnUrl = returnUrl });
 
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
@@ -387,21 +389,28 @@ namespace ShopTARge22.Controllers
                         {
                             UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
 
-                            Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+
+                            EmailConfirmed = true,
+
+                            City = ""
+
                         };
 
                         await _userManager.CreateAsync(user);
 
-                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                        var confirmationLink = Url.Action("ConfirmEmail", "Accounts", new { userId = user.Id, token = token }, Request.Scheme);
+                        //var confirmationLink = Url.Action("ConfirmEmail", "Accounts", new { userId = user.Id, token = token }, Request.Scheme);
 
                         //logger.Log(LogLevel.Warning, confirmationLink);
 
-                        ViewBag.ErrorTitle = "Registration successful";
-                        ViewBag.ErrorMessage = "Before you can login, please verify your email address. Verification link has been sent to your email";
-
-                        return View("Error");
+                        signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,
+                                                                            isPersistent: false, bypassTwoFactor: true);
+                        if (signInResult.Succeeded)
+                        {
+                            return LocalRedirect(returnUrl);
+                        }
                     }
 
                     await _userManager.AddLoginAsync(user, info);

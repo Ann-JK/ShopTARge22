@@ -7,7 +7,7 @@ namespace ShopTARge22.Models.Accounts
     {
         [Required]
         [EmailAddress]
-        [ValidEmailDomain(allowedDomain: "gmail.com", ErrorMessage ="Email domain must be gmail.com")]
+        //[ValidEmailDomain(allowedDomain: ".com", ErrorMessage ="Email domain must be gmail.com")]
         public string Email { get; set; }
 
 
@@ -21,6 +21,6 @@ namespace ShopTARge22.Models.Accounts
         [Compare("Password", ErrorMessage = "The new password and confirmation password do not match")]
         public string ConfirmPassword { get; set; }
 
-        public string City { get; set; }
+        public string? City { get; set; }
     }
 }

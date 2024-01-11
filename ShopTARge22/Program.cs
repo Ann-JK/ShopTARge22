@@ -47,11 +47,11 @@ builder.Services.Configure<CustomEmailConfigurationTokenProviderOptions>
     (o => o.TokenLifespan = TimeSpan.FromDays(3));
 
 builder.Services.AddAuthentication()
-    //.AddFacebook(options =>
-    //{
-    //    options.AppId = "";
-    //    options.AppSecret = "";
-    //})
+    .AddFacebook(options =>
+    {
+        options.AppId = "1726613754502075";
+        options.AppSecret = "6d810b6de16a3cc65ac3ed31af259bf3";
+    })
     .AddGoogle(options =>
     {
         options.ClientId = "653663266336-kv6l3lfqg666ufian0ccrh55anf6a10q.apps.googleusercontent.com";
