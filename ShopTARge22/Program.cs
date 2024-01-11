@@ -5,6 +5,7 @@ using ShopTARge22.ApplicationServices.Services;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Identity;
 using ShopTARge22.Core.Domain;
+using ShopTARge22.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,12 +28,23 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = true;
         options.Password.RequiredLength = 3;
+
+        options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
         options.Lockout.MaxFailedAccessAttempts = 3;
         options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
     })
     .AddEntityFrameworkStores<ShopTARge22Context>()
     .AddDefaultTokenProviders()
+    .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>("CustomEmailConfirmation")
     .AddDefaultUI();
+
+//all tokens
+builder.Services.Configure<DataProtectionTokenProviderOptions>
+    (o => o.TokenLifespan = TimeSpan.FromHours(5));
+
+//email tokens confirmation
+builder.Services.Configure<CustomEmailConfigurationTokenProviderOptions>
+    (o => o.TokenLifespan = TimeSpan.FromDays(3));
 
 
 
@@ -60,7 +72,20 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseRouting();
 
+builder.Services.AddAuthentication()
+    .AddFacebook(options => 
+    {
+        options.AppId = "";
+        options.AppSecret = "";
+    })
+    .AddGoogle(options =>
+    {
+        options.ClientId = "";
+        options.ClientSecret = "";
+    });
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapRazorPages();

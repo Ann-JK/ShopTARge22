@@ -15,4 +15,9 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-image: url("/gallery/background.jpg")
+}
+
+footer {
+    background-color: white;
 }
